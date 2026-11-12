@@ -1,0 +1,39 @@
+WePlay — external research reference
+====================================
+
+LOCATION
+  /mnt/Storage/AndroidStudio/weplay-research
+
+WHY IT MOVED OUT OF THIS REPOSITORY
+  The folder was originally at ./research inside the repo and weighed 2.5 GB.
+  When the repository was initialized, the ignore patterns in .gitignore could
+  not reliably keep it out. Only "*.apkm" matched, so these would have entered
+  git history on the first commit:
+
+    research/tools/            963 MB  (jdk21.tar.gz, gradle-8.9-bin.zip, jadx.zip)
+    research/apk/              986 MB  (base + split APK contents)
+    research/decompiled/       560 MB  (45,914 decompiled .java files + resources)
+    research/notes/             35 MB  (aapt resource/color/string dumps)
+
+  Large third-party binaries and decompiled third-party code must never be
+  committed. Moving the folder one level up, outside the repo root, removes the
+  risk completely instead of relying on ignore rules.
+
+NATURE OF THE CONTENT — READ-ONLY REFERENCE
+  Nothing from this folder may be copied into WePlay source, resources, or
+  assets. We take design direction only: information architecture, palette,
+  interaction patterns. See AGENTS.md ("Scope reminder") and the project rules.
+
+WHAT IS IN THERE
+  NOTES.md                            market research summary
+  reverse/WEPLAY-RE-DESIGN.md         design dossier — tabs, palette, 344-activity map
+  reverse/WEPLAY-CODE-MAP.md          decompile code map (package layout, obfuscation notes)
+  design_samples/                     icon/tab image samples, analysis only
+  notes/                              aapt dumps: activities, colors, strings, resources
+  apk/                                weplay-6.13.0.apkm + splits (original downloads)
+  decompiled/jadx-src/                jadx output (sources + resources)
+  tools/                              jadx, JDK 21, Gradle 8.9 archives used for analysis
+
+REGAINED IN THE REPOSITORY
+  2.5 GB of working-tree space and a clean status output, so branch work and
+  diffs only cover WePlay's own code.

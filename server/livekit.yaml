@@ -1,0 +1,46 @@
+# Self-hosted LiveKit SFU configuration for WePlay voice rooms.
+#
+# Secrets stay out of this file: keys are passed on the command line
+# (`--keys "KEYID: $SECRET"`) or through the LIVEKIT_KEYS environment variable, so
+# this config is safe to keep in the repository.
+#
+# Run:
+#   docker run -d --name livekit --restart unless-stopped --network host \
+#     -v "$PWD/server/livekit.yaml:/etc/lkconfig.yaml:ro" \
+#     livekit/livekit-server:latest --config /etc/lkconfig.yaml \
+#     --keys "APIdemo123: <secret from /etc/livekit/secret>"
+
+# Signalling and API port. The app connects to wss://<host>:7880
+http_port: 7880
+
+logging:
+  level: info
+  # Pion/WebRTC internals are very chatty; keep them out of journald.
+  pion_level: errors
+
+rtc:
+  # WebRTC media over this UDP range is what carries the actual voice.
+  port_range_start: 50000
+  port_range_end: 60000
+  # TCP fallback for networks that block UDP (many Indian 4G carriers do).
+  tcp_port: 7881
+  # Set to true when the host has a public IP; without it, ICE candidates are
+  # advertised with the private address and remote clients never connect.
+  use_external_ip: true
+  # Only needed when the VPS answers on a NAT'd interface instead of the public IP.
+  # hostname: call.example.com
+
+keys: {}
+  # Populated at runtime, e.g.
+  # APIdemo123: <32+ character secret>
+
+# Built-in TURN relay. Credentials derive from the LiveKit API secret.
+turn:
+  enabled: true
+  udp_port: 3478
+
+room:
+  # A room is torn down once everyone has left; no orphan state on a small VPS.
+  empty_timeout: 60
+  # Max participants per voice room. 8 seats + listeners.
+  max_participants: 24

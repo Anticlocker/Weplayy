@@ -1,0 +1,45 @@
+# Gradle / Android Studio
+.gradle/
+.kotlin/
+build/
+local.properties
+.idea/
+captures/
+*.iml
+.cxx/
+
+# APKs and distributions
+*.apk
+*.apkm
+*.aab
+*.xapk
+gradle/wrapper/*.zip
+
+# Research/reference material now lives outside the repo:
+# see RESEARCH-LOCATION.txt. Kept here as a safety net if it ever reappears.
+research/
+decompiled/
+
+# Stray binaries anywhere (JDK/gradle/jadx archives, tarballs)
+*.tar.gz
+*.tgz
+*.zip
+*.jar
+*.so
+*.aar
+
+# OS junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Local secrets / generated keys for the voice-room token flow
+*.keystore
+*.jks
+app/suppress.xml
+
+# Server dependencies and local database files
+server/node_modules/
+server/*.db
+server/*.db-wal
+server/*.db-shm

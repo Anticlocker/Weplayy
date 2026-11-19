@@ -148,15 +148,15 @@ fun WePlayBottomBar(nav: NavHostController, current: String?, msgBadge: Int = 0)
                                 painter = painterResource(tab.icon),
                                 contentDescription = tab.label,
                                 tint = if (selected) CyanBrand else inactiveColor,
-                                modifier = Modifier.size(26.dp),
+                                modifier = Modifier.size(24.dp),
                             )
                             // Chats badge with count
                             if (tab.route == Routes.MSG) {
-                                val badgeCount = if (msgBadge > 0) msgBadge else 1
+                                val badgeCount = if (msgBadge > 0) msgBadge else 44
                                 Box(
                                     modifier = Modifier
                                         .align(Alignment.TopEnd)
-                                        .offset(x = 8.dp, y = (-4).dp)
+                                        .offset(x = 10.dp, y = (-4).dp)
                                         .size(16.dp)
                                         .background(badgeRed, CircleShape),
                                     contentAlignment = Alignment.Center,
@@ -174,12 +174,19 @@ fun WePlayBottomBar(nav: NavHostController, current: String?, msgBadge: Int = 0)
                                 Box(
                                     modifier = Modifier
                                         .align(Alignment.TopEnd)
-                                        .offset(x = 3.dp, y = (-2).dp)
-                                        .size(6.dp)
+                                        .offset(x = 4.dp, y = (-2).dp)
+                                        .size(7.dp)
                                         .background(badgeRed, CircleShape),
                                 )
                             }
                         }
+                        Spacer(Modifier.height(3.dp))
+                        Text(
+                            text = tab.label,
+                            color = if (selected) CyanBrand else inactiveColor,
+                            fontSize = 10.sp,
+                            fontWeight = if (selected) FontWeight.Bold else FontWeight.Medium,
+                        )
                     }
                 }
             }
